@@ -22,10 +22,23 @@ macro record:
 			ctor.Body.Add([| self.$(r.Name) = $param |])
 		return ctor
 
+	def BuildGetHashCode(fields as List[of Field]):
+		metod = [| 
+					def GetHashCode() as int:
+						pass
+				|]
+		metod.Body.Add([| hashv = 17 |])
+		for f in fields:
+			metod.Body.Add([| hashv = hashv * 23 + $(f).GetHashCode() |])
+		metod.Body.Add([| return hashv |])
+		Boo.Lang.Compiler.Steps.AstAnnotations.MarkUnchecked(metod.Body)
+		return metod
+
 	fields = GetFields(record)
 	ctor = BuildCtor(fields)
 	clazz = ClassDefinition(Name: record.Arguments[0].ToString())
 	clazz.Members.Add(ctor)
+	clazz.Members.Add(BuildGetHashCode(fields))
 	for r in fields:
 		clazz.Members.Add(r)
 	yield clazz
@@ -37,4 +50,5 @@ record Person:
 
 p = Person("john", 23)
 print p.Name
+print p.GetHashCode()
 Console.ReadKey()
