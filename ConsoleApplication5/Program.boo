@@ -5,9 +5,9 @@ import System.Collections.Generic
 import Boo.Lang.Compiler.Ast
 
 macro record:
-	def GetFields(m as MacroStatement):
+	def GetFields(m as Block):
 		fields = List[of Field]()
-		for s in m.Body.Statements:
+		for s in m.Statements:
 			if s isa DeclarationStatement:
 				ss = s as DeclarationStatement
 				field = Field(Name: ss.Declaration.Name, Type: ss.Declaration.Type, Modifiers: TypeMemberModifiers.Final | TypeMemberModifiers.Public)
@@ -34,7 +34,7 @@ macro record:
 		metod.Body["checked"] = false
 		return metod
 
-	fields = GetFields(record)
+	fields = GetFields(record.Body)
 	ctor = BuildCtor(fields)
 	clazz = ClassDefinition(Name: record.Arguments[0].ToString())
 	clazz.Members.Add(ctor)
