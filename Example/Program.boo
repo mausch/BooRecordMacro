@@ -1,7 +1,6 @@
 namespace Example
 
 import System
-import System.Collections.Generic
 import Boo.Lang.Extensions
 
 record Person:
