@@ -43,3 +43,4 @@ macro record:
 		clazz.Members.Add(r)
 	yield clazz
 
+	# TODO equality, ToString()
