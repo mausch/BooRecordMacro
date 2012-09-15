@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Example</RootNamespace>
-    <AssemblyName>Example</AssemblyName>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RecordMacros</RootNamespace>
+    <AssemblyName>RecordMacros</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <Name>Example</Name>
-    <ProjectGuid>{6d89f4e9-d233-4289-8d1a-e004ce9f9b6c}</ProjectGuid>
+    <Name>RecordMacros</Name>
+    <ProjectGuid>{925d4b32-b656-49c7-a151-0cb3685151db}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -25,17 +25,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.boo" />
-    <Compile Include="Program.boo" />
+    <Compile Include="RecordMacro.boo" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RecordMacros\RecordMacros.booproj">
-      <Name>RecordMacros</Name>
-      <Project>{925d4b32-b656-49c7-a151-0cb3685151db}</Project>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(BooBinPath)\Boo.Microsoft.Build.targets" />
 </Project>

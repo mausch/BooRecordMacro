@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{CF123CF3-45B4-3FD7-96E9-A5194B39EB02}") = "Example", "Example\Example.booproj", "{6D89F4E9-D233-4289-8D1A-E004CE9F9B6C}"
 EndProject
+Project("{CF123CF3-45B4-3FD7-96E9-A5194B39EB02}") = "RecordMacros", "RecordMacros\RecordMacros.booproj", "{925D4B32-B656-49C7-A151-0CB3685151DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{6D89F4E9-D233-4289-8D1A-E004CE9F9B6C}.Debug|x86.Build.0 = Debug|x86
 		{6D89F4E9-D233-4289-8D1A-E004CE9F9B6C}.Release|x86.ActiveCfg = Release|x86
 		{6D89F4E9-D233-4289-8D1A-E004CE9F9B6C}.Release|x86.Build.0 = Release|x86
+		{925D4B32-B656-49C7-A151-0CB3685151DB}.Debug|x86.ActiveCfg = Debug|x86
+		{925D4B32-B656-49C7-A151-0CB3685151DB}.Debug|x86.Build.0 = Debug|x86
+		{925D4B32-B656-49C7-A151-0CB3685151DB}.Release|x86.ActiveCfg = Release|x86
+		{925D4B32-B656-49C7-A151-0CB3685151DB}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
