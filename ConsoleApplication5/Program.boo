@@ -31,7 +31,7 @@ macro record:
 		for f in fields:
 			metod.Body.Add([| hashv = hashv * 23 + $(f).GetHashCode() |])
 		metod.Body.Add([| return hashv |])
-		Boo.Lang.Compiler.Steps.AstAnnotations.MarkUnchecked(metod.Body)
+		metod.Body["checked"] = false
 		return metod
 
 	fields = GetFields(record)
