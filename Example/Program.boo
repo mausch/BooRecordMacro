@@ -1,4 +1,4 @@
-namespace ConsoleApplication5
+namespace Example
 
 import System
 import System.Collections.Generic
