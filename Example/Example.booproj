@@ -24,6 +24,9 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="LensExtensions.boo">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.boo" />
     <Compile Include="Program.boo" />
   </ItemGroup>
