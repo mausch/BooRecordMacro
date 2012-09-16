@@ -5,7 +5,7 @@ import System.Collections.Generic
 import Boo.Lang.Compiler.Ast
 
 public static class Lensf:
-	def Create[of S,D](lget as Func[of S,D], lset as Func[of D,S,S]) as FSharpx.Lens[of S,D]:
+	def Create[of S,D](lget as Func[of S,D], lset as Func[of D,S,S]):
 		fget = FSharpx.FSharpFunc.FromFunc(lget)
 		fset = FSharpx.FSharpFunc.FromFunc(lset)
 		return FSharpx.Lens[of S,D](fget, fset)
@@ -64,10 +64,11 @@ macro record:
 	clazz.Members.Add(BuildGetHashCode(fields))
 	for r in fields:
 		clazz.Members.Add(r)
+	ctor = BuildCtor(fields)
+	clazz.Members.Add(ctor)
 	lenses = BuildLenses(clazz, fields)
 	for r in lenses:
 		clazz.Members.Add(r)
-	clazz.Members.Add(BuildCtor(fields))
 	clazz.Members.Add(BuildStaticCtor(clazz, fields, lenses))
 	yield clazz
 
