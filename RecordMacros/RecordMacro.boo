@@ -42,8 +42,11 @@ macro record:
 
 	def BuildStaticCtor(clazz as ClassDefinition, fields as List[of Field], lenses as List[of Field]):
 		ctor = Constructor()
-		for f as Field, l as Field in zip(fields, lenses):
-			ctor.Body.Add([| self.$(l.Name) = Lensf.Create[of $(clazz),$(f.Type)]({ x as $(clazz) | return x.$(f.Name) }, { a as $(f.Type), b as $(clazz) | return b }) |])
+		for i in range(fields.Count):
+			f = fields[i]
+			l = lenses[i]
+			setter = [| { a as $(f.Type), b as $(clazz) | return b } |]
+			ctor.Body.Add([| self.$(l.Name) = Lensf.Create[of $(clazz),$(f.Type)]({ x as $(clazz) | return x.$(f.Name) }, $(setter)) |])
 		ctor.Modifiers = ctor.Modifiers | TypeMemberModifiers.Static
 		return ctor
 
