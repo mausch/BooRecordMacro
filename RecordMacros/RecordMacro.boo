@@ -28,17 +28,23 @@ macro record:
 		for f in fields:
 			lensType = GenericTypeReference("FSharpx.Lens", SimpleTypeReference(clazz.Name), f.Type)
 			field = newField(f.Name + "Lens", lensType)
-			# field.Modifiers = field.Modifiers | TypeMemberModifiers.Static
+			field.Modifiers = field.Modifiers | TypeMemberModifiers.Static
 			lenses.Add(field)
 		return lenses
 
-	def BuildCtor(clazz as ClassDefinition, fields as List[of Field], lenses as List[of Field]):
+	def BuildCtor(fields as List[of Field]):
 		ctor = Constructor()
-		for f as Field, l as Field in zip(fields, lenses):
+		for f in fields:
 			param = ParameterDeclaration(Name: f.Name, Type: f.Type)
 			ctor.Parameters.Add(param)
 			ctor.Body.Add([| self.$(f.Name) = $param |])
+		return ctor
+
+	def BuildStaticCtor(clazz as ClassDefinition, fields as List[of Field], lenses as List[of Field]):
+		ctor = Constructor()
+		for f as Field, l as Field in zip(fields, lenses):
 			ctor.Body.Add([| self.$(l.Name) = Lensf.Create[of $(clazz),$(f.Type)]({ x as $(clazz) | return x.$(f.Name) }, { a as $(f.Type), b as $(clazz) | return b }) |])
+		ctor.Modifiers = ctor.Modifiers | TypeMemberModifiers.Static
 		return ctor
 
 	def BuildGetHashCode(fields as List[of Field]):
@@ -61,8 +67,8 @@ macro record:
 	lenses = BuildLenses(clazz, fields)
 	for r in lenses:
 		clazz.Members.Add(r)
-	ctor = BuildCtor(clazz, fields, lenses)
-	clazz.Members.Add(ctor)
+	clazz.Members.Add(BuildCtor(fields))
+	clazz.Members.Add(BuildStaticCtor(clazz, fields, lenses))
 	yield clazz
 
 	# TODO equality, ToString(), copy-and-update

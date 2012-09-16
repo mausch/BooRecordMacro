@@ -9,6 +9,6 @@ record Person:
 
 p = Person("john", 23)
 print p.Name
-print p.NameLens.Get.Invoke(p)
+print Person.NameLens.Get.Invoke(p)
 print p.GetHashCode()
 Console.ReadKey()
