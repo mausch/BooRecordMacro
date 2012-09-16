@@ -10,4 +10,7 @@ record Person:
 p = Person("john", 23)
 print p.Name
 print Person.NameLens.Get(p)
+print Person.ValueLens.Set(p, 44).Value
+print Person.NameLens.Set(p, "David").Name
+# print Person.ValueLens.Update(p, {x as int | x + 11 }).Value # error BCE0055: Internal compiler error: Collection was modified; enumeration operation may not execute
 Console.ReadKey()

@@ -45,7 +45,14 @@ macro record:
 		for i in range(fields.Count):
 			f = fields[i]
 			l = lenses[i]
-			setter = [| { a as $(f.Type), b as $(clazz) | return b } |]
+			setter = [| { a as $(f.Type), b as $(clazz) | return $(clazz)() } |]
+			returnStatement = setter.Body.Statements[0] as ReturnStatement
+			methodInvokExpr = returnStatement.Expression as MethodInvocationExpression
+			for p in range(i):
+				methodInvokExpr.Arguments.Add([| b.$(fields[p].Name) |])
+			methodInvokExpr.Arguments.Add([| a |])
+			for p in range(i+1, fields.Count):
+				methodInvokExpr.Arguments.Add([| b.$(fields[p].Name) |])
 			ctor.Body.Add([| self.$(l.Name) = Lensf.Create[of $(clazz),$(f.Type)]({ x as $(clazz) | return x.$(f.Name) }, $(setter)) |])
 		ctor.Modifiers = ctor.Modifiers | TypeMemberModifiers.Static
 		return ctor
