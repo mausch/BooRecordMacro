@@ -6,7 +6,9 @@ import Boo.Lang.Compiler.Ast
 
 public static class Lensf:
 	def Create[of S,D](lget as Func[of S,D], lset as Func[of D,S,S]) as FSharpx.Lens[of S,D]:
-		raise "asdasd"
+		fget = FSharpx.FSharpFunc.FromFunc(lget)
+		fset = FSharpx.FSharpFunc.FromFunc(lset)
+		return FSharpx.Lens[of S,D](fget, fset)
 
 macro record:
 	def newField(name, type):
@@ -24,19 +26,19 @@ macro record:
 	def BuildLenses(clazz as ClassDefinition, fields as List[of Field]):
 		lenses = List[of Field]()
 		for f in fields:
-			lens = [| Lensf.Create[of $(clazz),$(f.Type)]({x|0}, { a,b | return b}) |]
 			lensType = GenericTypeReference("FSharpx.Lens", SimpleTypeReference(clazz.Name), f.Type)
 			field = newField(f.Name + "Lens", lensType)
-			field.Modifiers = field.Modifiers | TypeMemberModifiers.Static
+			# field.Modifiers = field.Modifiers | TypeMemberModifiers.Static
 			lenses.Add(field)
 		return lenses
 
-	def BuildCtor(fields as List[of Field]):
+	def BuildCtor(clazz as ClassDefinition, fields as List[of Field], lenses as List[of Field]):
 		ctor = Constructor()
-		for r in fields:
-			param = ParameterDeclaration(Name: r.Name, Type: r.Type)
+		for f as Field, l as Field in zip(fields, lenses):
+			param = ParameterDeclaration(Name: f.Name, Type: f.Type)
 			ctor.Parameters.Add(param)
-			ctor.Body.Add([| self.$(r.Name) = $param |])
+			ctor.Body.Add([| self.$(f.Name) = $param |])
+			ctor.Body.Add([| self.$(l.Name) = Lensf.Create[of $(clazz),$(f.Type)]({ x as $(clazz) | return x.$(f.Name) }, { a as $(f.Type), b as $(clazz) | return b }) |])
 		return ctor
 
 	def BuildGetHashCode(fields as List[of Field]):
@@ -52,15 +54,15 @@ macro record:
 		return metod
 
 	fields = GetFields(record.Body)
-	ctor = BuildCtor(fields)
 	clazz = ClassDefinition(Name: record.Arguments[0].ToString())
-	clazz.Members.Add(ctor)
 	clazz.Members.Add(BuildGetHashCode(fields))
 	for r in fields:
 		clazz.Members.Add(r)
 	lenses = BuildLenses(clazz, fields)
 	for r in lenses:
 		clazz.Members.Add(r)
+	ctor = BuildCtor(clazz, fields, lenses)
+	clazz.Members.Add(ctor)
 	yield clazz
 
 	# TODO equality, ToString(), copy-and-update
