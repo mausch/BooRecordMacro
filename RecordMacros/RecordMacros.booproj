@@ -5,9 +5,12 @@
     <OutputType>Library</OutputType>
     <RootNamespace>RecordMacros</RootNamespace>
     <AssemblyName>RecordMacros</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <Name>RecordMacros</Name>
     <ProjectGuid>{925d4b32-b656-49c7-a151-0cb3685151db}</ProjectGuid>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <Ducky>False</Ducky>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -24,29 +27,9 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.boo" />
     <Compile Include="RecordMacro.boo" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="FSharp.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <Name>FSharp.Core</Name>
-      <AssemblyName>FSharp.Core.dll</AssemblyName>
-    </Reference>
-    <Reference Include="FSharp.PowerPack, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a19089b1c74d0809">
-      <Name>FSharp.PowerPack</Name>
-      <AssemblyName>FSharp.PowerPack.dll</AssemblyName>
-    </Reference>
-    <Reference Include="FSharp.PowerPack.Linq, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a19089b1c74d0809">
-      <Name>FSharp.PowerPack.Linq</Name>
-      <AssemblyName>FSharp.PowerPack.Linq.dll</AssemblyName>
-    </Reference>
-    <Reference Include="FSharp.PowerPack.Metadata, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a19089b1c74d0809">
-      <Name>FSharp.PowerPack.Metadata</Name>
-      <AssemblyName>FSharp.PowerPack.Metadata.dll</AssemblyName>
-    </Reference>
     <Reference Include="FSharpx.Core, Version=1.6.4.0, Culture=neutral, PublicKeyToken=null">
       <Name>FSharpx.Core</Name>
       <AssemblyName>FSharpx.Core.dll</AssemblyName>

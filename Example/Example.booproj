@@ -5,9 +5,12 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Example</RootNamespace>
     <AssemblyName>Example</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <Name>Example</Name>
     <ProjectGuid>{6d89f4e9-d233-4289-8d1a-e004ce9f9b6c}</ProjectGuid>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <Ducky>False</Ducky>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -27,11 +30,7 @@
     <Compile Include="LensExtensions.boo">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.boo" />
     <Compile Include="Program.boo" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RecordMacros\RecordMacros.booproj">
@@ -41,11 +40,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Boo.Lang, Version=2.0.9.4, Culture=neutral, PublicKeyToken=32c39770e9a21a67">
-      <Name>Boo.Lang</Name>
-      <AssemblyName>Boo.Lang.dll</AssemblyName>
-      <HintPath>..\lib\Boo.Lang.dll</HintPath>
-    </Reference>
     <Reference Include="FSharp.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Name>FSharp.Core</Name>
       <AssemblyName>FSharp.Core.dll</AssemblyName>
