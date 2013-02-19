@@ -38,6 +38,9 @@
     <Reference Include="Example">
       <HintPath>..\Example\bin\Debug\Example.exe</HintPath>
     </Reference>
+    <Reference Include="FSharp.PowerPack">
+      <HintPath>..\lib\FSharp.PowerPack.dll</HintPath>
+    </Reference>
     <Reference Include="FSharpx.Core">
       <HintPath>..\Example\bin\Debug\FSharpx.Core.dll</HintPath>
     </Reference>

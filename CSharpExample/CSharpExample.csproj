@@ -41,6 +41,10 @@
       <HintPath>..\Example\bin\Debug\Example.exe</HintPath>
     </Reference>
     <Reference Include="FSharp.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="FSharp.PowerPack, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a19089b1c74d0809, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\FSharp.PowerPack.dll</HintPath>
+    </Reference>
     <Reference Include="FSharpx.Core">
       <HintPath>..\Example\bin\Debug\FSharpx.Core.dll</HintPath>
     </Reference>
