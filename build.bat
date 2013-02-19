@@ -5,3 +5,4 @@ copy lib\Boo.lang.dll Example\bin\debug\
 copy lib\FSharpx.Core.dll Example\bin\debug\
 copy RecordMacros\bin\Debug\RecordMacros.dll Example\bin\debug\
 msbuild csharpExample\CSharpExample.csproj
+msbuild FSharpExample\FSharpExample.fsproj
